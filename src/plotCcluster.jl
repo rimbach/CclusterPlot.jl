@@ -82,6 +82,18 @@ function drawDisk(d::Array{fmpq,1}, color::String, opacity::Float64)
                               )
     end
 end
+
+# function drawMarker(d::Array{fmpq,1}, color::String)
+#     
+#     radius = (d[3]).num/(d[3]).den
+#     cRe  = (d[1]).num/(d[1]).den
+#     cIm   = (d[2]).num/(d[2]).den
+#     return matplotlib_marker[:Circle]( 
+#                                (cRe, cIm), 
+#                                 radius, 
+#                                 facecolor=color, edgecolor="black", alpha=opacity 
+#                               )
+# end
     
 function plotCcluster( disks, initBox::Array{fmpq,1}, focus=false )
     objects = []
@@ -128,11 +140,21 @@ function plotCcluster( disks, initBox::Array{fmpq,1}, focus=false )
     lower = lower.num/lower.den
     upper = upper.num/upper.den
 
-    ax[:set_xlim](left, right )
-    ax[:set_ylim](lower, upper)
+    inflate = 0.05
+    
+    ax[:set_xlim](left - inflate*(right-left), right + inflate*(right-left))
+    ax[:set_ylim](lower - inflate*(upper-lower), upper + inflate*(upper-lower))
     for index = 1:length(objects)
         ax[:add_patch](objects[index])
+        
     end
+    
+    for index = 1:length(disks)
+        #draw markers at centers of disks
+        ax[:plot]( disks[index][2][1].num/disks[index][2][1].den,
+                   disks[index][2][2].num/disks[index][2][2].den , marker="1", markersize=6, color = "green")
+    end
+    
 end
 
 function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
