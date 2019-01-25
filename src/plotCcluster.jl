@@ -35,6 +35,10 @@ function drawBox(b::Array{fmpq,1}, color::String, opacity::Float64)
     end
 end
 
+function drawBox(b::box, color::String, opacity::Float64)
+    return drawBox([getCenterRe(b), getCenterIm(b), getWidth(b)], color, opacity)
+end
+
 function drawBox(b::box, fill, color::String, opacity::Float64)
     shift = fmpq(1,2)*getWidth(b)
     width = getWidth(b)
@@ -79,7 +83,7 @@ function drawDisk(d::Array{fmpq,1}, color::String, opacity::Float64)
     end
 end
     
-function plotCcluster( disks, initBox, focus=false )
+function plotCcluster( disks, initBox::Array{fmpq,1}, focus=false )
     objects = []
     
     push!(objects, drawBox(initBox,     String("no-fill"), 0.0))
