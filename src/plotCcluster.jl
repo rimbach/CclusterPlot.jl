@@ -11,15 +11,20 @@
 
 # @pyimport matplotlib.patches as patch
 
+CC = ComplexField(53)
+RR = RealField(53)
+
 function drawBox(b::Array{fmpq,1}, color::String, opacity::Float64)
     shift = fmpq(1,2)*b[3]
     width = b[3]
     left  = b[1] - shift
     low   = b[2] - shift
-    shift = shift.num/shift.den
-    left  = left.num/left.den
-    low   = low.num/low.den
-    width = width.num/width.den
+    
+    shift = convert(Float64, RR(shift))
+    left  = convert(Float64, RR(left ))
+    low   = convert(Float64, RR(low  ))
+    width = convert(Float64, RR(width))
+    
     if color=="no-fill"
         return matplotlib_patches[:Rectangle]( 
                                (left, low), 
@@ -44,10 +49,12 @@ function drawBox(b::box, fill, color::String, opacity::Float64)
     width = getWidth(b)
     left  = getCenterRe(b) - shift
     low   = getCenterIm(b) - shift
-    shift = shift.num/shift.den
-    left  = left.num/left.den
-    low   = low.num/low.den
-    width = width.num/width.den
+    
+    shift = convert(Float64, RR(shift))
+    left  = convert(Float64, RR(left ))
+    low   = convert(Float64, RR(low  ))
+    width = convert(Float64, RR(width))
+    
     if fill==false
         return matplotlib_patches[:Rectangle]( 
                                (left, low), 
@@ -65,9 +72,10 @@ end
 
 function drawDisk(d::Array{fmpq,1}, color::String, opacity::Float64)
     
-    radius = (d[3]).num/(d[3]).den
-    cRe  = (d[1]).num/(d[1]).den
-    cIm   = (d[2]).num/(d[2]).den
+    radius = convert(Float64, RR(d[3]))
+    cRe    = convert(Float64, RR(d[1]))
+    cIm    = convert(Float64, RR(d[2]))
+    
     if color=="no-fill"
         return matplotlib_patches[:Circle]( 
                                (cRe, cIm), 
@@ -82,18 +90,6 @@ function drawDisk(d::Array{fmpq,1}, color::String, opacity::Float64)
                               )
     end
 end
-
-# function drawMarker(d::Array{fmpq,1}, color::String)
-#     
-#     radius = (d[3]).num/(d[3]).den
-#     cRe  = (d[1]).num/(d[1]).den
-#     cIm   = (d[2]).num/(d[2]).den
-#     return matplotlib_marker[:Circle]( 
-#                                (cRe, cIm), 
-#                                 radius, 
-#                                 facecolor=color, edgecolor="black", alpha=opacity 
-#                               )
-# end
     
 function plotCcluster( disks, initBox::Array{fmpq,1}, focus=false )
     objects = []
@@ -135,10 +131,11 @@ function plotCcluster( disks, initBox::Array{fmpq,1}, focus=false )
          end
     end
     
-    left  = left.num/left.den
-    right = right.num/right.den
-    lower = lower.num/lower.den
-    upper = upper.num/upper.den
+    left = convert(Float64, RR(left))
+    right = convert(Float64, RR(right))
+    lower = convert(Float64, RR(lower))
+    upper = convert(Float64, RR(upper))
+    
 
     inflate = 0.05
     
@@ -151,8 +148,9 @@ function plotCcluster( disks, initBox::Array{fmpq,1}, focus=false )
     
     for index = 1:length(disks)
         #draw markers at centers of disks
-        ax[:plot]( disks[index][2][1].num/disks[index][2][1].den,
-                   disks[index][2][2].num/disks[index][2][2].den , marker="1", markersize=6, color = "green")
+        center = CC( disks[index][2][1], disks[index][2][2] )
+        ax[:plot]( convert(Float64, real(center)),
+                   convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
     end
     
 end
