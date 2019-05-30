@@ -26,13 +26,23 @@ function drawBox(b::Array{fmpq,1}, color::String, opacity::Float64)
     width = convert(Float64, RR(width))
     
     if color=="no-fill"
-        return matplotlib_patches[:Rectangle]( 
+#         return matplotlib_patches[:Rectangle]( 
+#                                (left, low), 
+#                                 width, width, 
+#                                 fill=false, edgecolor="black",lw=2
+#                               )
+        return matplotlib_patches.Rectangle( 
                                (left, low), 
                                 width, width, 
                                 fill=false, edgecolor="black",lw=2
                               )
     else
-        return matplotlib_patches[:Rectangle]( 
+#         return matplotlib_patches[:Rectangle]( 
+#                                (left, low ), 
+#                                 width, width, 
+#                                 facecolor=color, edgecolor="black", alpha=opacity 
+#                               )
+        return matplotlib_patches.Rectangle( 
                                (left, low ), 
                                 width, width, 
                                 facecolor=color, edgecolor="black", alpha=opacity 
