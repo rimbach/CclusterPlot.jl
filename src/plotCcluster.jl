@@ -26,22 +26,12 @@ function drawBox(b::Array{fmpq,1}, color::String, opacity::Float64)
     width = convert(Float64, RR(width))
     
     if color=="no-fill"
-#         return matplotlib_patches[:Rectangle]( 
-#                                (left, low), 
-#                                 width, width, 
-#                                 fill=false, edgecolor="black",lw=2
-#                               )
         return matplotlib_patches.Rectangle( 
                                (left, low), 
                                 width, width, 
                                 fill=false, edgecolor="black",lw=2
                               )
     else
-#         return matplotlib_patches[:Rectangle]( 
-#                                (left, low ), 
-#                                 width, width, 
-#                                 facecolor=color, edgecolor="black", alpha=opacity 
-#                               )
         return matplotlib_patches.Rectangle( 
                                (left, low ), 
                                 width, width, 
@@ -66,13 +56,23 @@ function drawBox(b::box, fill, color::String, opacity::Float64)
     width = convert(Float64, RR(width))
     
     if fill==false
-        return matplotlib_patches[:Rectangle]( 
+#         return matplotlib_patches[:Rectangle]( 
+#                                (left, low), 
+#                                 width, width, 
+#                                 fill=false, edgecolor=color, lw=0.5
+#                               )
+        return matplotlib_patches.Rectangle( 
                                (left, low), 
                                 width, width, 
                                 fill=false, edgecolor=color, lw=0.5
                               )
     else
-        return matplotlib_patches[:Rectangle]( 
+#         return matplotlib_patches[:Rectangle]( 
+#                                (left, low ), 
+#                                 width, width, 
+#                                 facecolor=color, edgecolor="black", alpha=opacity
+#                               )
+        return matplotlib_patches.Rectangle( 
                                (left, low ), 
                                 width, width, 
                                 facecolor=color, edgecolor="black", alpha=opacity
@@ -87,13 +87,23 @@ function drawDisk(d::Array{fmpq,1}, color::String, opacity::Float64)
     cIm    = convert(Float64, RR(d[2]))
     
     if color=="no-fill"
-        return matplotlib_patches[:Circle]( 
+#         return matplotlib_patches[:Circle]( 
+#                                (cRe, cIm), 
+#                                 radius, 
+#                                 fill=false, edgecolor="black"
+#                               )
+        return matplotlib_patches.Circle( 
                                (cRe, cIm), 
                                 radius, 
                                 fill=false, edgecolor="black"
                               )
     else
-        return matplotlib_patches[:Circle]( 
+#         return matplotlib_patches[:Circle]( 
+#                                (cRe, cIm), 
+#                                 radius, 
+#                                 facecolor=color, edgecolor="black", alpha=opacity 
+#                               )
+        return matplotlib_patches.Circle( 
                                (cRe, cIm), 
                                 radius, 
                                 facecolor=color, edgecolor="black", alpha=opacity 
@@ -149,17 +159,21 @@ function plotCcluster( disks, initBox::Array{fmpq,1}, focus=false )
 
     inflate = 0.05
     
-    ax[:set_xlim](left - inflate*(right-left), right + inflate*(right-left))
-    ax[:set_ylim](lower - inflate*(upper-lower), upper + inflate*(upper-lower))
+#     ax[:set_xlim](left - inflate*(right-left), right + inflate*(right-left))
+#     ax[:set_ylim](lower - inflate*(upper-lower), upper + inflate*(upper-lower))
+    ax.set_xlim(left - inflate*(right-left), right + inflate*(right-left))
+    ax.set_ylim(lower - inflate*(upper-lower), upper + inflate*(upper-lower))
     for index = 1:length(objects)
-        ax[:add_patch](objects[index])
-        
+#         ax[:add_patch](objects[index])
+        ax.add_patch(objects[index])
     end
     
     for index = 1:length(disks)
         #draw markers at centers of disks
         center = CC( disks[index][2][1], disks[index][2][2] )
-        ax[:plot]( convert(Float64, real(center)),
+#         ax[:plot]( convert(Float64, real(center)),
+#                    convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
+        ax.plot( convert(Float64, real(center)),
                    convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
     end
     
@@ -222,9 +236,12 @@ function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
     lower = lower.num/lower.den
     upper = upper.num/upper.den
 
-    ax[:set_xlim](left, right )
-    ax[:set_ylim](lower, upper)
+#     ax[:set_xlim](left, right )
+#     ax[:set_ylim](lower, upper)
+    ax.set_xlim(left, right )
+    ax.set_ylim(lower, upper)
     for index = 1:length(objects)
-        ax[:add_patch](objects[index])
+#         ax[:add_patch](objects[index])
+        ax.add_patch(objects[index])
     end
 end
