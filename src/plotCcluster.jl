@@ -168,13 +168,15 @@ function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true 
         ax.add_patch(objects[index])
     end
     
-    for index = 1:length(disks)
-        #draw markers at centers of disks
-        center = CC( disks[index][2][1], disks[index][2][2] )
-#         ax[:plot]( convert(Float64, real(center)),
-#                    convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
-        ax.plot( convert(Float64, real(center)),
-                   convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
+    if markers
+        for index = 1:length(disks)
+            #draw markers at centers of disks
+            center = CC( disks[index][2][1], disks[index][2][2] )
+    #         ax[:plot]( convert(Float64, real(center)),
+    #                    convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
+            ax.plot( convert(Float64, real(center)),
+                    convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
+        end
     end
     
 end
