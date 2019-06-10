@@ -111,7 +111,7 @@ function drawDisk(d::Array{fmpq,1}, color::String, opacity::Float64)
     end
 end
     
-function plotCcluster( disks, initBox::Array{fmpq,1}, focus=false )
+function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true )
     objects = []
     
     push!(objects, drawBox(initBox,     String("no-fill"), 0.0))
