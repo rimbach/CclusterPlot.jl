@@ -111,7 +111,7 @@ function drawDisk(d::Array{fmpq,1}, color::String, opacity::Float64)
     end
 end
     
-function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true )
+function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true, otherpatches=[] )
     objects = []
     
     push!(objects, drawBox(initBox,     String("no-fill"), 0.0))
@@ -177,6 +177,11 @@ function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true 
             ax.plot( convert(Float64, real(center)),
                     convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
         end
+    end
+    
+    for index = 1:length(otherpatches)
+#         ax[:add_patch](objects[index])
+        ax.add_patch(otherpatches[index])
     end
     
     return fig, ax
