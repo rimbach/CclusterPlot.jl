@@ -179,7 +179,7 @@ function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true 
         end
     end
     
-    return ax
+    return fig, ax
     
 end
 
