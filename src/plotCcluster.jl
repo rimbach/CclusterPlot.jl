@@ -179,6 +179,8 @@ function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true 
         end
     end
     
+    return ax
+    
 end
 
 function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
