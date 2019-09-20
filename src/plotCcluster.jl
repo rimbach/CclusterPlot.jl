@@ -200,7 +200,7 @@ function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
     end
     
     for index = 1:length(CCs)
-        tempBO = Ccluster.getComponentBox(CCs[index],box(initBox[1],initBox[2],initBox[3]))
+        tempBO = getComponentBox(CCs[index],box(initBox[1],initBox[2],initBox[3]))
         boxestemp = drawBox( tempBO, true, "green", 0.3 )
         push!(objects, boxestemp)
         while !isEmpty(CCs[index])
