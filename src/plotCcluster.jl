@@ -45,16 +45,17 @@ function drawBox(b::box, color::String, opacity::Float64)
 end
 
 function drawBox(b::box, fill, color::String, opacity::Float64)
+    print("la\n")
     shift = fmpq(1,2)*getWidth(b)
     width = getWidth(b)
     left  = getCenterRe(b) - shift
     low   = getCenterIm(b) - shift
-    
+    print("la la\n")
     shift = convert(Float64, RR(shift))
     left  = convert(Float64, RR(left ))
     low   = convert(Float64, RR(low  ))
     width = convert(Float64, RR(width))
-    
+    print("la la la\n")
     if fill==false
 #         return matplotlib_patches[:Rectangle]( 
 #                                (left, low), 
@@ -78,6 +79,7 @@ function drawBox(b::box, fill, color::String, opacity::Float64)
                                 facecolor=color, edgecolor="black", alpha=opacity
                               )
     end
+    print("la la la la\n")
 end
 
 function drawDisk(d::Array{fmpq,1}, color::String, opacity::Float64)
