@@ -3,7 +3,7 @@ VERSION >= v"0.4.0-dev+6521" && __precompile__()
 module CclusterPlot
 
 import Nemo: fmpq, RealField, ComplexField
-import Ccluster: box, getCenterRe, getCenterIm, getWidth, getComponentBox
+import Ccluster: box, getCenterRe, getCenterIm, getWidth, getComponentBox, isEmpty
 
 # using Ccluster
 using PyCall
