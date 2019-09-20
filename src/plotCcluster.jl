@@ -195,10 +195,12 @@ function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
 #     enlargedBox = [ initBox[1], initBox[2], fmpq(5,4)*initBox[3] ]
 #     push!(objects, drawBox(enlargedBox, String("no-fill"), 0.0))
     
+    print("ici\n")
     for index = 1:length(discardedBoxes)
         boxestemp = drawBox( discardedBoxes[index], false, "red", 1.0 )
         push!(objects, boxestemp)
     end
+    print("la\n")
     
     for index = 1:length(CCs)
         tempBO = getComponentBox(CCs[index],box(initBox[1],initBox[2],initBox[3]))
