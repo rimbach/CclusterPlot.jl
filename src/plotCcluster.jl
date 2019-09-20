@@ -46,6 +46,7 @@ end
 
 function drawBox(b::box, fill, color::String, opacity::Float64)
     print("la\n")
+    print("b: $b\n");
     shift = fmpq(1,2)*getWidth(b)
     width = getWidth(b)
     left  = getCenterRe(b) - shift
