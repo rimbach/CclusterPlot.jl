@@ -214,10 +214,10 @@ function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
     
     fig, ax = subplots()
     
-    left  = initBox[1] - fmpq(5,2)*initBox[3]; 
-    right = initBox[1] + fmpq(5,2)*initBox[3]; 
-    lower = initBox[2] - fmpq(5,2)*initBox[3]; 
-    upper = initBox[2] + fmpq(5,2)*initBox[3];
+    left  = initBox[1] - fmpq(5,8)*initBox[3]; 
+    right = initBox[1] + fmpq(5,8)*initBox[3]; 
+    lower = initBox[2] - fmpq(5,8)*initBox[3]; 
+    upper = initBox[2] + fmpq(5,8)*initBox[3];
         
     if focus && length(disks)>=1
          left  = disks[1][2][1] - disks[1][2][3]
