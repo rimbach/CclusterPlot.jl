@@ -199,17 +199,17 @@ function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
         push!(objects, boxestemp)
     end
     
-    for index = 1:length(CCs)
-        tempBO = getComponentBox(CCs[index],box(initBox[1],initBox[2],initBox[3]))
-        boxestemp = drawBox( tempBO, true, "green", 0.3 )
-        push!(objects, boxestemp)
-        while !isEmpty(CCs[index])
-            tempBO = pop(CCs[index])
-            boxestemp = drawBox( tempBO, true, "green", 1.0 )
-            push!(objects, boxestemp)
-        end
-        
-    end
+#     for index = 1:length(CCs)
+#         tempBO = getComponentBox(CCs[index],box(initBox[1],initBox[2],initBox[3]))
+#         boxestemp = drawBox( tempBO, true, "green", 0.3 )
+#         push!(objects, boxestemp)
+#         while !isEmpty(CCs[index])
+#             tempBO = pop(CCs[index])
+#             boxestemp = drawBox( tempBO, true, "green", 1.0 )
+#             push!(objects, boxestemp)
+#         end
+#         
+#     end
     
     fig, ax = subplots()
     
