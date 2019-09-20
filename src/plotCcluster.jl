@@ -190,9 +190,10 @@ end
 function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
     objects = []
     
-    push!(objects, drawBox(initBox,     String("no-fill"), 0.0))
-#     enlargedBox = [ initBox[1], initBox[2], fmpq(5,4)*initBox[3] ]
-#     push!(objects, drawBox(enlargedBox, String("no-fill"), 0.0))
+#     push!(objects, drawBox(initBox,     String("no-fill"), 0.0))
+    
+    enlargedBox = [ initBox[1], initBox[2], fmpq(5,4)*initBox[3] ]
+    push!(objects, drawBox(enlargedBox, String("no-fill"), 0.0))
     
     for index = 1:length(discardedBoxes)
         boxestemp = drawBox( discardedBoxes[index], false, "red", 1.0 )
@@ -213,10 +214,10 @@ function plotCcluster_subdiv( CCs, discardedBoxes, initBox, focus=false )
     
     fig, ax = subplots()
     
-    left  = initBox[1] - initBox[3]; 
-    right = initBox[1] + initBox[3]; 
-    lower = initBox[2] - initBox[3]; 
-    upper = initBox[2] + initBox[3];
+    left  = initBox[1] - fmpq(5,2)*initBox[3]; 
+    right = initBox[1] + fmpq(5,2)*initBox[3]; 
+    lower = initBox[2] - fmpq(5,2)*initBox[3]; 
+    upper = initBox[2] + fmpq(5,2)*initBox[3];
         
     if focus && length(disks)>=1
          left  = disks[1][2][1] - disks[1][2][3]
