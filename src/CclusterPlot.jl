@@ -5,9 +5,8 @@ module CclusterPlot
 import Nemo: fmpq, RealField, ComplexField
 import Ccluster: box, getCenterRe, getCenterIm, getWidth, getComponentBox, isEmpty, pop
 
-# using Ccluster
 using PyCall
-using PyPlot
+import PyPlot: subplots
 
 const matplotlib_patches = PyNULL()
 
