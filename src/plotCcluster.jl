@@ -158,12 +158,9 @@ function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true,
 
     inflate = 0.05
     
-#     ax[:set_xlim](left - inflate*(right-left), right + inflate*(right-left))
-#     ax[:set_ylim](lower - inflate*(upper-lower), upper + inflate*(upper-lower))
     ax.set_xlim(left - inflate*(right-left), right + inflate*(right-left))
     ax.set_ylim(lower - inflate*(upper-lower), upper + inflate*(upper-lower))
     for index = 1:length(objects)
-#         ax[:add_patch](objects[index])
         ax.add_patch(objects[index])
     end
     
@@ -171,15 +168,79 @@ function plotCcluster( disks, initBox::Array{fmpq,1}; focus=false, markers=true,
         for index = 1:length(disks)
             #draw markers at centers of disks
             center = CC( disks[index][2][1], disks[index][2][2] )
-    #         ax[:plot]( convert(Float64, real(center)),
-    #                    convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
             ax.plot( convert(Float64, real(center)),
                     convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
         end
     end
     
     for index = 1:length(otherpatches)
-#         ax[:add_patch](objects[index])
+        ax.add_patch(otherpatches[index])
+    end
+    
+    return fig, ax
+    
+end
+
+function plotCcluster( disks; markers=true, otherpatches=[] )
+    objects = []
+    
+    for index = 1:length(disks)
+        boxestemp = drawDisk( disks[index][2], "green", 0.5 )
+        push!(objects, boxestemp)
+    end
+    
+    fig, ax = subplots()
+    
+    left  = fmpq(0,1); 
+    right = fmpq(0,1);
+    lower = fmpq(0,1); 
+    upper = fmpq(0,1);
+        
+    if length(disks)>=1
+         left  = disks[1][2][1] - disks[1][2][3]
+         right = disks[1][2][1] + disks[1][2][3]
+         lower = disks[1][2][2] - disks[1][2][3]
+         upper = disks[1][2][2] + disks[1][2][3]
+         for index = 2:length(disks)
+            if (disks[index][2][1] - disks[index][2][3]) < left
+                left  = disks[index][2][1] - disks[index][2][3]
+            end
+            if (disks[index][2][1] + disks[index][2][3]) > right
+                right  = disks[index][2][1] + disks[index][2][3]
+            end
+            if (disks[index][2][2] - disks[index][2][3]) < lower
+                lower  = disks[index][2][2] - disks[index][2][3]
+            end
+            if (disks[index][2][2] + disks[index][2][3]) > upper
+                upper  = disks[index][2][2] + disks[index][2][3]
+            end
+         end
+    end
+    
+    left = convert(Float64, RR(left))
+    right = convert(Float64, RR(right))
+    lower = convert(Float64, RR(lower))
+    upper = convert(Float64, RR(upper))
+    
+
+    inflate = 0.05
+    
+    ax.set_xlim(left - inflate*(right-left), right + inflate*(right-left))
+    ax.set_ylim(lower - inflate*(upper-lower), upper + inflate*(upper-lower))
+    for index = 1:length(objects)
+        ax.add_patch(objects[index])
+    end
+    
+    if markers
+        for index = 1:length(disks)
+            #draw markers at centers of disks
+            center = CC( disks[index][2][1], disks[index][2][2] )
+            ax.plot( convert(Float64, real(center)),
+                    convert(Float64, imag(center)) , marker="1", markersize=6, color = "green")
+        end
+    end
+    
+    for index = 1:length(otherpatches)
         ax.add_patch(otherpatches[index])
     end
     
