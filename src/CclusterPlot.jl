@@ -11,10 +11,10 @@ import PyPlot: subplots
 const matplotlib_patches = PyNULL()
 
 function __init__()
-    println("")
-    println("Welcome to CclusterPlot version 0.0.1")
-    println("")
-    
+#    println("")
+#    println("Welcome to CclusterPlot version 0.0.1")
+#    println("")
+#    
     copy!(matplotlib_patches, pyimport_conda("matplotlib.patches", "matplotlib"))
 end
 
